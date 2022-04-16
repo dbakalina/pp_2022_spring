@@ -133,8 +133,8 @@ std::vector <int> lin_shell_sort(std::vector<int> vctr, int size) {
     }
     std::copy(res.begin(), res.begin() + size / 2, vctr_l.begin());
     std::copy(res.begin() + size / 2, res.end(), vctr_r.begin());
-    vctr_l = shell_sort(vctr_l, size);
-    vctr_r = shell_sort(vctr_r, size);
+    vctr_l = shell_sort(vctr_l);
+    vctr_r = shell_sort(vctr_r);
     res = merge_two_vector(vctr_l, vctr_r);
     return res;
 }
