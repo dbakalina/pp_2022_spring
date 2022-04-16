@@ -71,8 +71,7 @@ std::vector<int> merge_two_vector(std::vector<int> vctr_1, std::vector<int> vctr
             res[k] = vctr_1[i];
             i++;
             size_1--;
-        }
-        else {
+        } else {
             res[k] = vctr_2[j];
             j++;
             size_2--;
@@ -84,8 +83,7 @@ std::vector<int> merge_two_vector(std::vector<int> vctr_1, std::vector<int> vctr
             res[k] = vctr_2[l];
             k++;
         }
-    }
-    else if (size_2 == 0) {
+    } else if (size_2 == 0) {
         for (int m = i; m < i + size_1; m++) {
             res[k] = vctr_1[m];
             k++;
@@ -113,6 +111,31 @@ std::vector <int> shell_sort(const std::vector <int>& v) {
             }
         }
     }
+    return res;
+}
+
+std::vector <int> lin_shell_sort(std::vector<int> vctr, int size) {
+    if (size < 1) {
+        throw "Wrong size";
+    }
+    if (size == 1) {
+        return vctr;
+    }
+    std::vector<int> res = vctr;
+    std::vector<int> vctr_l;
+    std::vector<int> vctr_r;
+    if (size % 2 == 0) {
+        vctr_l.resize(size / 2);
+        vctr_r.resize(size / 2);
+    } else {
+        vctr_l.resize(size / 2);
+        vctr_r.resize(size / 2 + 1);
+    }
+    std::copy(res.begin(), res.begin() + size / 2, vctr_l.begin());
+    std::copy(res.begin() + size / 2, res.end(), vctr_r.begin());
+    vctr_l = shell_sort(vctr_l, size);
+    vctr_r = shell_sort(vctr_r, size);
+    res = merge_two_vector(vctr_l, vctr_r);
     return res;
 }
 
